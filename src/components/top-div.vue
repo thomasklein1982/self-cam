@@ -5,7 +5,7 @@
         Mehr Mathe und Informatik unter
       </p>
       <div>
-        mathe-info.com
+        mathe-info.com bla
       </div>
     </div>
     

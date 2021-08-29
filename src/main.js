@@ -7,7 +7,6 @@ const updateSW = registerSW({
     let a=confirm("Es ist eine neue Version verfügbar. Wollen Sie die neue Version installieren?");
     if(a){
       updateSW();
-      console.log('update');
       window.location.reload();
     }
   },
