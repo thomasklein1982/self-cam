@@ -14,7 +14,7 @@ export default {
     }
   },
   mounted(){
-    navigator.mediaDevices.getUserMedia({video: true, audio: false},
+    navigator.getUserMedia({video: true, audio: false},
     (stream)=>{
       this.$refs.video.srcObject=stream;
     },
