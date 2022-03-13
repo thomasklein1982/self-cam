@@ -12,10 +12,10 @@
       Self-Cam ist eine App von <a href="https://mathe-info.com" target="_blank">Thomas Klein</a>.
     </div>
     <div>
-      Größe: <input type="range" v-model="newSettings.size"/> Hintergrund: <input type="color" v-model="newSettings.background"/> Schrift: <input type="color" v-model="newSettings.foreground"/>
+      Größe: <input type="range" v-model="settings.size"/> Hintergrund: <input type="color" v-model="settings.background"/> Schrift: <input type="color" v-model="settings.foreground"/>
     </div>
-    <textarea v-model="newSettings.html" style="width: 100%" :style="{flex: 1}"></textarea>
-    <div style="text-align: right"><button @click="changeSettings()">OK</button><button @click="showSettings=false">Abbrechen</button><button @click="reset(newSettings)">Zurücksetzen</button></div>
+    <textarea v-model="settings.html" style="width: 100%" :style="{flex: 1}"></textarea>
+    <div style="text-align: right"><button @click="changeSettings()">OK</button><button @click="cancelSettings()">Abbrechen</button><button @click="reset(settings)">Zurücksetzen</button></div>
   </div>
 </template>
 
@@ -23,8 +23,8 @@
 export default {
   watch: {
     showSettings(){
-      for(let a in this.newSettings){
-        this.newSettings[a]=this.settings[a];
+      for(let a in this.oldSettings){
+        this.oldSettings[a]=this.settings[a];
       }
     }
   },
@@ -36,7 +36,7 @@ export default {
   data(){
     return {
       showSettings: false,
-      newSettings: {
+      oldSettings: {
         html: "",
         background: "",
         foreground: "",
@@ -56,9 +56,9 @@ export default {
     if(saved){
       try{
         this.settings=JSON.parse(saved);
-        for(let a in this.newSettings){
+        for(let a in this.oldSettings){
           if(!(a in this.settings)){
-            this.settings[a]=this.newSettings[a];
+            this.settings[a]=this.oldSettings[a];
           }
         }
       }catch(e){
@@ -86,10 +86,13 @@ export default {
       }
     },
     changeSettings(){
-      for(let a in this.settings){
-        this.settings[a]=this.newSettings[a];
-      }
       localStorage.setItem(this.SAVE_KEY,JSON.stringify(this.settings));
+      this.showSettings=false;
+    },
+    cancelSettings(){
+      for(let a in this.settings){
+        this.settings[a]=this.oldSettings[a];
+      }
       this.showSettings=false;
     }
   }
