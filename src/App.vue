@@ -1,6 +1,6 @@
 <template>
   <div id="screen">
-    <top-div id="top">
+    <top-div>
     </top-div>
     <self-cam></self-cam>
 
@@ -11,23 +11,12 @@
 import selfCam from './components/self-cam.vue'
 import TopDiv from './components/top-div.vue'
 export default {
-  mounted(){
-    this.checkForUpdate(true);
-  },
-  methods: {
-    checkForUpdate: function(force){
-      if(navigator && navigator.serviceWorker && navigator.serviceWorker.controller){
-        navigator.serviceWorker.controller.postMessage({type: 1, version: version, force: force});
-      }
-    },
-    updateApp: function(){
-      if(navigator && navigator.serviceWorker && navigator.serviceWorker.controller){
-        navigator.serviceWorker.controller.postMessage({type: 2});
-      }
+  data(){
+    return {
+      version: "2"
     }
   },
   components: { selfCam, TopDiv },
-  
 }
 </script>
 

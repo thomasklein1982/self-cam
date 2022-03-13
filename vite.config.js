@@ -11,7 +11,7 @@ export default defineConfig({
       manifest: {
         name: 'Self-Cam',
         short_name: 'Self-Cam',
-        description: 'Description of your app',
+        description: 'Filme dich selbst während du einen Sceencast machst.',
         theme_color: '#ffffff',
         icons: [
           {
