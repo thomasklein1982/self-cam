@@ -1,6 +1,6 @@
 <template>
   <div id="top" :style="{'font-size': fontSize, 'background-color': settings.background, 'color': settings.foreground}">
-    <div v-html="settings.html">
+    <div v-html="markdown">
       
     </div>
     
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { marked } from 'marked';
 export default {
   watch: {
     showSettings(){
@@ -31,7 +32,10 @@ export default {
   computed: {
     fontSize(){
       return (this.settings.size*1.5+70)+"%";
-    }
+    },
+    markdown(){
+      return marked(this.settings.html);
+    } 
   },
   data(){
     return {
@@ -75,12 +79,7 @@ export default {
         force=confirm("Willst du wirklich alles auf die Ursprungswerte zurücksetzen?");
       }
       if(force){
-        settingsObject.html=`<p>
-  Mehr Mathe und Informatik unter
-</p>
-<div>
-  mathe-info.com
-</div>`;
+        settingsObject.html="Mehr Mathe und Informatik unter\n\n*mathe-info.com*";
         settingsObject.foreground="#ffffff";
         settingsObject.background="#121212";
       }

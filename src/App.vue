@@ -13,7 +13,7 @@ import TopDiv from './components/top-div.vue'
 export default {
   data(){
     return {
-      version: "3"
+      version: "4"
     }
   },
   components: { selfCam, TopDiv },
